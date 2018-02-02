@@ -1,0 +1,21 @@
+package com.scalayadu.rdds
+
+import com.scalayadu.fact.Movie
+
+rule "ACHILLES"
+	dialect "mvel"
+	when
+		mov: Movie(movieName == "ACHILLES\"")
+
+	then
+		System.out.println("ACHILLES......fired")
+end
+
+rule "ABSALOM"
+	dialect "mvel"
+	when
+		mov: Movie(movieName == "ABSALOM\"")
+
+	then
+		System.out.println("ABSALOM......fired")
+end
