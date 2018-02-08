@@ -1,4 +1,5 @@
 
+package com.scalayadu.dao
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.hive
 import org.apache.spark.sql.Row
@@ -9,20 +10,19 @@ object SparkHive {
   
   def main(args:Array[String]) = {
   
-    /*
+   
   val sc = new SparkContext("yarn-client","SparkHive")
   val hc = new org.apache.spark.sql.hive.HiveContext(sc)
   val query_str = get_query_str()
   //System.out.println("Query: ") 
   //System.out.print(get_query_str())
   val query_res = hc.sql(query_str)
-  
-  /*
+ 
   System.out.println(query_res.count());
   
   System.out.println(query_res.first());
   
-  System.out.println(query_res.columns); */
+  System.out.println(query_res.columns); 
   
   val res_rdd = query_res.rdd
   
@@ -32,8 +32,6 @@ object SparkHive {
   
   System.out.println("first: " + claim_rdd.first())
   
-  */
-    System.out.print("lets see if this fixes the jar issue!")
 
   }
   
@@ -67,32 +65,32 @@ object SparkHive {
     claim.setDx_code_5(row.getString(8))
     claim.setDx_code_6(row.getString(9))
     claim.setDx_code_7(row.getString(10))
-    claim.setDx_code_8(row.getString(12))
-    claim.setDx_code_9(row.getString(13))
-    claim.setDx_code_10(row.getString(14))
-    claim.setDx_code_11(row.getString(15))
-    claim.setDx_code_12(row.getString(16))
+    claim.setDx_code_8(row.getString(11))
+    claim.setDx_code_9(row.getString(12))
+    claim.setDx_code_10(row.getString(13))
+    claim.setDx_code_11(row.getString(14))
+    claim.setDx_code_12(row.getString(15))
     //unit_counts
-    claim.setUnit_count_1(row.getFloat(17))
-    claim.setUnit_count_2(row.getFloat(18))
-    claim.setUnit_count_3(row.getFloat(19))
-    claim.setUnit_count_4(row.getFloat(20))
-    claim.setUnit_count_5(row.getFloat(21))
-    claim.setUnit_count_6(row.getFloat(22))
-    claim.setUnit_count_7(row.getFloat(23))
-    claim.setUnit_count_8(row.getFloat(24))
-    claim.setUnit_count_9(row.getFloat(25))
-    claim.setUnit_count_10(row.getFloat(26))
-    claim.setUnit_count_11(row.getFloat(27))
-    claim.setUnit_count_12(row.getFloat(28))
-    claim.setUnit_count_13(row.getFloat(29))
-    claim.setUnit_count_14(row.getFloat(30))
-    claim.setUnit_count_15(row.getFloat(31))
-    claim.setUnit_count_16(row.getFloat(32))
-    claim.setUnit_count_17(row.getFloat(33))
-    claim.setUnit_count_18(row.getFloat(34))
+    claim.setUnit_count_1(row.getDecimal(16))
+    claim.setUnit_count_2(row.getDecimal(17))
+    claim.setUnit_count_3(row.getDecimal(18))
+    claim.setUnit_count_4(row.getDecimal(19))
+    claim.setUnit_count_5(row.getDecimal(20))
+    claim.setUnit_count_6(row.getDecimal(21))
+    claim.setUnit_count_7(row.getDecimal(22))
+    claim.setUnit_count_8(row.getDecimal(23))
+    claim.setUnit_count_9(row.getDecimal(24))
+    claim.setUnit_count_10(row.getDecimal(25))
+    claim.setUnit_count_11(row.getDecimal(26))
+    claim.setUnit_count_12(row.getDecimal(27))
+    claim.setUnit_count_13(row.getDecimal(28))
+    claim.setUnit_count_14(row.getDecimal(29))
+    claim.setUnit_count_15(row.getDecimal(30))
+    claim.setUnit_count_16(row.getDecimal(31))
+    claim.setUnit_count_17(row.getDecimal(32))
+    claim.setUnit_count_18(row.getDecimal(33))
     
-    claim.setFraud_exclusion_code(row.getString(35))
+    claim.setFraud_exclusion_code(row.getString(34))
     
   }
   
