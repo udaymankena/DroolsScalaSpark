@@ -1,55 +1,26 @@
 
 package com.scalayadu.dao
 import org.apache.spark.SparkContext
+import org.apache.spark.SparkContext
 import org.apache.spark.sql.hive
 import org.apache.spark.sql.Row
 import scala.io.Source
 import com.scalayadu.fact._
 
-object SparkHive {
+class SparkHive extends java.io.Serializable {
   
-  def main(args:Array[String]) = {
+  def getClaimRdd(sc:SparkContext) = {
   
-   
-  val sc = new SparkContext("yarn-client","SparkHive")
   val hc = new org.apache.spark.sql.hive.HiveContext(sc)
   val query_str = get_query_str()
-  //System.out.println("Query: ") 
-  //System.out.print(get_query_str())
   val query_res = hc.sql(query_str)
- 
-  System.out.println(query_res.count());
-  
-  System.out.println(query_res.first());
-  
-  System.out.println(query_res.columns); 
   
   val res_rdd = query_res.rdd
   
   val claim_rdd = res_rdd.map(row => rdd_map(row))
   
-  System.out.println("count: " + claim_rdd.count())
-  
-  System.out.println("first: " + claim_rdd.first())
-  
-
+  claim_rdd
   }
-  
-  /* This method maps each row of COB data from hive to the Scala Cob object
-   * and creates a tuple of Cob Objects*/
-  def tuple_cob_map(tup: (String,String,String,String)) = {
-    val cob_obj = new Cob(tup._1,tup._2,tup._3,tup._4)
-    cob_obj
-  }
-  
-  /*def tuple_claim_map(tup: (String,String,String,String,String,String,String,String,
-                            String,String,String,String,String,String,String,String,
-                            Float,Float,Float,Float,Float,Float,Float,Float,
-                            Float,Float,Float,Float,Float,Float,Float,Float,
-                            Float,Float,Int,String,String,Boolean)) = {
-    /*val cob_obj = new Cob(tup._1,tup._2,tup._3,tup._4)
-    cob_obj*/
-  }*/
   
   def rdd_map(row:Row) = {
     val claim = new Claim()
@@ -92,6 +63,7 @@ object SparkHive {
     
     claim.setFraud_exclusion_code(row.getString(34))
     
+    claim
   }
   
   /*This method reads the query.hql file and returns a string with all the content of the file 

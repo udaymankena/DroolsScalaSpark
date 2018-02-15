@@ -1,0 +1,16 @@
+package com.scalayadu.Drools
+
+import com.scalayadu.fact.Claim
+
+
+rule "Ansar"
+	dialect "mvel"
+    when
+        c:Claim(claim_id.matches("EKAB1NRTH01"))
+    then
+        System.out.println("Ansar fired....")
+end
+
+
+
+
